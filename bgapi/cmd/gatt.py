@@ -99,7 +99,8 @@ def find_included_services(connection, service):
     return command(MSG_TYPE, MIN_PAYLOAD_LENGTH, MSG_CLASS, MSG_ID, payload)
 
 
-def prepare_characteristic_value_reliable_write(connection, characteristic, offset, value):
+def prepare_characteristic_value_reliable_write(connection, characteristic,
+                                                offset, value):
     MSG_TYPE = 0x20
     MIN_PAYLOAD_LENGTH = 0x06
     MSG_CLASS = 0x09
@@ -108,7 +109,8 @@ def prepare_characteristic_value_reliable_write(connection, characteristic, offs
     return command(MSG_TYPE, MIN_PAYLOAD_LENGTH, MSG_CLASS, MSG_ID, payload)
 
 
-def prepare_characteristic_value_write(connection, characteristic, offset, value):
+def prepare_characteristic_value_write(connection, characteristic, offset,
+                                       value):
     MSG_TYPE = 0x20
     MIN_PAYLOAD_LENGTH = 0x06
     MSG_CLASS = 0x09
@@ -135,7 +137,8 @@ def read_characteristic_value_by_uuid(connection, service, uuid):
     return command(MSG_TYPE, MIN_PAYLOAD_LENGTH, MSG_CLASS, MSG_ID, payload)
 
 
-def read_characteristic_value_from_offset(connection, characteristic, offset, maxlen):
+def read_characteristic_value_from_offset(connection, characteristic, offset,
+                                          maxlen):
     MSG_TYPE = 0x20
     MIN_PAYLOAD_LENGTH = 0x07
     MSG_CLASS = 0x09
@@ -158,7 +161,8 @@ def read_multiple_characteristic_values(connection, characteristic_list):
     MIN_PAYLOAD_LENGTH = 0x02
     MSG_CLASS = 0x09
     MSG_ID = 0x11
-    payload = pack('<B', connection) + characteristic_list_to_bytes(characteristic_list)
+    payload = pack(
+        '<B', connection) + characteristic_list_to_bytes(characteristic_list)
     return command(MSG_TYPE, MIN_PAYLOAD_LENGTH, MSG_CLASS, MSG_ID, payload)
 
 
@@ -198,7 +202,8 @@ def write_characteristic_value(connection, characteristic, value):
     return command(MSG_TYPE, MIN_PAYLOAD_LENGTH, MSG_CLASS, MSG_ID, payload)
 
 
-def write_characteristic_value_without_response(connection, characteristic, value):
+def write_characteristic_value_without_response(connection, characteristic,
+                                                value):
     MSG_TYPE = 0x20
     MIN_PAYLOAD_LENGTH = 0x04
     MSG_CLASS = 0x09

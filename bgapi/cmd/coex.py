@@ -3,6 +3,7 @@ from struct import pack
 
 from bgapi.cmd import command
 
+
 class Option(IntFlag):
     OPTION_ENABLE = 256
     OPTION_TX_ABORT = 1024
