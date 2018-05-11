@@ -1,7 +1,7 @@
 from enum import IntFlag
 from struct import pack
 
-from bgapi.cmd import cmd
+from bgapi.cmd import command
 
 class Option(IntFlag):
     OPTION_ENABLE = 256
@@ -15,7 +15,7 @@ def get_counters(reset):
     MSG_CLASS = 0x20
     MSG_ID = 0x01
     payload = pack('<B', reset)
-    return cmd(MSG_TYPE, MIN_PAYLOAD_LENGTH, MSG_CLASS, MSG_ID, payload)
+    return command(MSG_TYPE, MIN_PAYLOAD_LENGTH, MSG_CLASS, MSG_ID, payload)
 
 
 def set_options(mask, options):
@@ -24,4 +24,4 @@ def set_options(mask, options):
     MSG_CLASS = 0x20
     MSG_ID = 0x00
     payload = pack('<II', mask, options)
-    return cmd(MSG_TYPE, MIN_PAYLOAD_LENGTH, MSG_CLASS, MSG_ID, payload)
+    return command(MSG_TYPE, MIN_PAYLOAD_LENGTH, MSG_CLASS, MSG_ID, payload)

@@ -1,6 +1,6 @@
 from struct import pack
 
-from bgapi.cmd import cmd
+from bgapi.cmd import command
 
 
 def flash_set_address(address):
@@ -9,7 +9,7 @@ def flash_set_address(address):
     MSG_CLASS = 0x00
     MSG_ID = 0x01
     payload = pack('<I', address)
-    return cmd(MSG_TYPE, MIN_PAYLOAD_LENGTH, MSG_CLASS, MSG_ID, payload)
+    return command(MSG_TYPE, MIN_PAYLOAD_LENGTH, MSG_CLASS, MSG_ID, payload)
 
 
 def flash_upload(data):
@@ -18,7 +18,7 @@ def flash_upload(data):
     MSG_CLASS = 0x00
     MSG_ID = 0x02
     payload = data
-    return cmd(MSG_TYPE, MIN_PAYLOAD_LENGTH, MSG_CLASS, MSG_ID, payload)
+    return command(MSG_TYPE, MIN_PAYLOAD_LENGTH, MSG_CLASS, MSG_ID, payload)
 
 
 def flash_upload_finish():
@@ -27,7 +27,7 @@ def flash_upload_finish():
     MSG_CLASS = 0x00
     MSG_ID = 0x03
     payload = b''
-    return cmd(MSG_TYPE, MIN_PAYLOAD_LENGTH, MSG_CLASS, MSG_ID, payload)
+    return command(MSG_TYPE, MIN_PAYLOAD_LENGTH, MSG_CLASS, MSG_ID, payload)
 
 
 def reset(dfu):
@@ -36,4 +36,4 @@ def reset(dfu):
     MSG_CLASS = 0x00
     MSG_ID = 0x00
     payload = pack('<B', dfu)
-    return cmd(MSG_TYPE, MIN_PAYLOAD_LENGTH, MSG_CLASS, MSG_ID, payload)
+    return command(MSG_TYPE, MIN_PAYLOAD_LENGTH, MSG_CLASS, MSG_ID, payload)

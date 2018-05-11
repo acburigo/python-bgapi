@@ -1,7 +1,5 @@
-from struct import pack
-
-
-def cmd(msg_type, min_payload_length, msg_class, msg_id, payload=b''):
-    b = pack('<BBBB', msg_type, min_payload_length, msg_class, msg_id)
-    b += payload
-    return b
+from bgapi.cmd.base import command
+import bgapi.cmd.coex
+import bgapi.cmd.dfu
+import bgapi.cmd.flash
+import bgapi.cmd.gatt
