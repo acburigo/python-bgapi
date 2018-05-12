@@ -105,7 +105,8 @@ def prepare_characteristic_value_reliable_write(connection, characteristic,
     MIN_PAYLOAD_LENGTH = 0x06
     MSG_CLASS = 0x09
     MSG_ID = 0x13
-    payload = pack('<BHHB', connection, characteristic, offset, len(value)) + value
+    payload = pack('<BHHB', connection, characteristic, offset,
+                   len(value)) + value
     return command(MSG_TYPE, MIN_PAYLOAD_LENGTH, MSG_CLASS, MSG_ID, payload)
 
 
@@ -115,7 +116,8 @@ def prepare_characteristic_value_write(connection, characteristic, offset,
     MIN_PAYLOAD_LENGTH = 0x06
     MSG_CLASS = 0x09
     MSG_ID = 0x0b
-    payload = pack('<BHHB', connection, characteristic, offset, len(value)) + value
+    payload = pack('<BHHB', connection, characteristic, offset,
+                   len(value)) + value
     return command(MSG_TYPE, MIN_PAYLOAD_LENGTH, MSG_CLASS, MSG_ID, payload)
 
 
