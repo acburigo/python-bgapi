@@ -105,7 +105,7 @@ def prepare_characteristic_value_reliable_write(connection, characteristic,
     MIN_PAYLOAD_LENGTH = 0x06
     MSG_CLASS = 0x09
     MSG_ID = 0x13
-    payload = pack('<BHH', connection, characteristic, offset) + value
+    payload = pack('<BHHB', connection, characteristic, offset, len(value)) + value
     return command(MSG_TYPE, MIN_PAYLOAD_LENGTH, MSG_CLASS, MSG_ID, payload)
 
 
@@ -115,7 +115,7 @@ def prepare_characteristic_value_write(connection, characteristic, offset,
     MIN_PAYLOAD_LENGTH = 0x06
     MSG_CLASS = 0x09
     MSG_ID = 0x0b
-    payload = pack('<BHH', connection, characteristic, offset) + value
+    payload = pack('<BHHB', connection, characteristic, offset, len(value)) + value
     return command(MSG_TYPE, MIN_PAYLOAD_LENGTH, MSG_CLASS, MSG_ID, payload)
 
 
@@ -198,7 +198,7 @@ def write_characteristic_value(connection, characteristic, value):
     MIN_PAYLOAD_LENGTH = 0x04
     MSG_CLASS = 0x09
     MSG_ID = 0x09
-    payload = pack('<BH', connection, characteristic) + value
+    payload = pack('<BHB', connection, characteristic, len(value)) + value
     return command(MSG_TYPE, MIN_PAYLOAD_LENGTH, MSG_CLASS, MSG_ID, payload)
 
 
@@ -208,7 +208,7 @@ def write_characteristic_value_without_response(connection, characteristic,
     MIN_PAYLOAD_LENGTH = 0x04
     MSG_CLASS = 0x09
     MSG_ID = 0x0a
-    payload = pack('<BH', connection, characteristic) + value
+    payload = pack('<BHB', connection, characteristic, len(value)) + value
     return command(MSG_TYPE, MIN_PAYLOAD_LENGTH, MSG_CLASS, MSG_ID, payload)
 
 
@@ -217,5 +217,5 @@ def write_descriptor_value(connection, descriptor, value):
     MIN_PAYLOAD_LENGTH = 0x04
     MSG_CLASS = 0x09
     MSG_ID = 0x0f
-    payload = pack('<BH', connection, descriptor) + value
+    payload = pack('<BHB', connection, descriptor, len(value)) + value
     return command(MSG_TYPE, MIN_PAYLOAD_LENGTH, MSG_CLASS, MSG_ID, payload)

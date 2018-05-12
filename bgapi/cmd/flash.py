@@ -35,5 +35,5 @@ def ps_save(key, value):
     MIN_PAYLOAD_LENGTH = 0x03
     MSG_CLASS = 0x0d
     MSG_ID = 0x02
-    payload = pack('<H', key) + value
+    payload = pack('<HB', key, len(value)) + value
     return command(MSG_TYPE, MIN_PAYLOAD_LENGTH, MSG_CLASS, MSG_ID, payload)
