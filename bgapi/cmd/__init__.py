@@ -6,3 +6,4 @@ import bgapi.cmd.gatt
 import bgapi.cmd.gatt_server
 import bgapi.cmd.hardware
 import bgapi.cmd.le_connection
+import bgapi.cmd.le_gap
