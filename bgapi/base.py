@@ -131,3 +131,12 @@ def from_binary(data: bytes):
         }, offset
     except error:
         return None, 0
+
+
+def _parse_basic_response(data: bytes, offset: int):
+    FORMAT = '<H'
+    result = unpack_from(FORMAT, data, offset=offset)
+    offset += calcsize(FORMAT)
+    return {
+        'result': result,
+    }
