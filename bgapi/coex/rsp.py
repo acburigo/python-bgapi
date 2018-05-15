@@ -2,6 +2,7 @@ from struct import (unpack_from, calcsize)
 
 from bgapi.base import _parse_basic_response
 
+
 def _get_counters(data: bytes, offset: int = 0):
     payload, offset = _parse_basic_response(data, offset)
     FORMAT = '<B'
