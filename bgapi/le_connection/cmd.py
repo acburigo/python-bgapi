@@ -1,14 +1,6 @@
-from enum import IntEnum
 from struct import pack
 
-from bgapi.cmd import command
-
-
-class Security(IntEnum):
-    MODE1_LEVEL1 = 0
-    MODE1_LEVEL2 = 1
-    MODE1_LEVEL3 = 2
-    MODE1_LEVEL4 = 3
+from bgapi import command
 
 
 def close(connection):

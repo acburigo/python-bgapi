@@ -1,6 +1,6 @@
 from struct import pack
 
-from bgapi.cmd import command
+from bgapi import command
 
 
 def message_to_target(data):

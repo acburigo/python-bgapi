@@ -1,13 +1,6 @@
-from enum import IntFlag
 from struct import pack
 
-from bgapi.cmd import command
-
-
-class Option(IntFlag):
-    OPTION_ENABLE = 256
-    OPTION_TX_ABORT = 1024
-    OPTION_HIGH_PRIORITY = 2048
+from bgapi import command
 
 
 def get_counters(reset):

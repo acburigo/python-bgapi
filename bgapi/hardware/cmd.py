@@ -1,6 +1,6 @@
 from struct import pack
 
-from bgapi.cmd import command
+from bgapi import command
 
 
 def set_lazy_soft_timer(time, slack, handle, single_shot):

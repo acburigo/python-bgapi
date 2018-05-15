@@ -1,12 +1,6 @@
-from enum import IntFlag
 from struct import pack
 
-from bgapi.cmd import command
-
-
-class CharacteristicStatusFlag(IntFlag):
-    CLIENT_CONFIG = 1
-    CONFIRMATION = 2
+from bgapi import command
 
 
 def find_attribute(start, type_data):

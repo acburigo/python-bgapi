@@ -1,6 +1,6 @@
 from struct import pack
 
-from bgapi.cmd import command
+from bgapi import command
 from bgapi.utils import address_to_bytes
 
 

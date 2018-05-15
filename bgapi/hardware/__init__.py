@@ -1,0 +1,1 @@
+import bgapi.hardware.cmd
