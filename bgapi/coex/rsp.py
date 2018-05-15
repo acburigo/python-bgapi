@@ -10,6 +10,7 @@ def _get_counters(data: bytes, offset: int = 0):
     offset += calcsize(FORMAT)
     counters = unpack_from('<%dB' % n, data, offset=offset)
     payload.update({'counters': list(counters)})
+    offset += n
     return payload, offset
 
 
