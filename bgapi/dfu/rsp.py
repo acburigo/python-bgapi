@@ -1,5 +1,3 @@
-from struct import (unpack_from, calcsize)
-
 from bgapi.base import _parse_basic_response
 
 
