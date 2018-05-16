@@ -104,6 +104,7 @@ PARSE_MAP = {
         },
 
         MessageClass.USER: {
+            0x00: bgapi.user.rsp.message_to_target,
         },
     },
 
