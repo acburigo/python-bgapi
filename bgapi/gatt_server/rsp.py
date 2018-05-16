@@ -3,7 +3,7 @@ from struct import (unpack_from, calcsize)
 from bgapi.base import _parse_result
 
 
-def _find_attribute(data: bytes, offset: int = 0):
+def find_attribute(data: bytes, offset: int = 0):
     result, offset = _parse_result(data, offset)
     FORMAT = '<H'
     sent_len, = unpack_from(FORMAT, data, offset=offset)
@@ -15,7 +15,7 @@ def _find_attribute(data: bytes, offset: int = 0):
     return payload, offset
 
 
-def _read_attribute_type(data: bytes, offset: int = 0):
+def read_attribute_type(data: bytes, offset: int = 0):
     result, offset = _parse_result(data, offset)
     FORMAT = '<B'
     n = unpack_from(FORMAT, data, offset=offset)
@@ -28,7 +28,7 @@ def _read_attribute_type(data: bytes, offset: int = 0):
     return payload, offset
 
 
-def _read_attribute_value(data: bytes, offset: int = 0):
+def read_attribute_value(data: bytes, offset: int = 0):
     result, offset = _parse_result(data, offset)
     FORMAT = '<B'
     n = unpack_from(FORMAT, data, offset=offset)
@@ -41,7 +41,7 @@ def _read_attribute_value(data: bytes, offset: int = 0):
     return payload, offset
 
 
-def _send_characteristic_notification(data: bytes, offset: int = 0):
+def send_characteristic_notification(data: bytes, offset: int = 0):
     result, offset = _parse_result(data, offset)
     FORMAT = '<H'
     sent_len, = unpack_from(FORMAT, data, offset=offset)
@@ -53,7 +53,7 @@ def _send_characteristic_notification(data: bytes, offset: int = 0):
     return payload, offset
 
 
-def _send_user_read_response(data: bytes, offset: int = 0):
+def send_user_read_response(data: bytes, offset: int = 0):
     result, offset = _parse_result(data, offset)
     FORMAT = '<H'
     sent_len, = unpack_from(FORMAT, data, offset=offset)
@@ -65,19 +65,19 @@ def _send_user_read_response(data: bytes, offset: int = 0):
     return payload, offset
 
 
-def _send_user_write_response(data: bytes, offset: int = 0):
+def send_user_write_response(data: bytes, offset: int = 0):
     result, offset = _parse_result(data, offset)
     payload = {'result': result}
     return payload, offset
 
 
-def _set_capabilities(data: bytes, offset: int = 0):
+def set_capabilities(data: bytes, offset: int = 0):
     result, offset = _parse_result(data, offset)
     payload = {'result': result}
     return payload, offset
 
 
-def _write_attribute_value(data: bytes, offset: int = 0):
+def write_attribute_value(data: bytes, offset: int = 0):
     result, offset = _parse_result(data, offset)
     payload = {'result': result}
     return payload, offset
