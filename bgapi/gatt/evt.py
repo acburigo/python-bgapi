@@ -24,7 +24,7 @@ def characteristic(data: bytes, offset: int = 0):
 
 def characteristic_value(data: bytes, offset: int = 0):
     FORMAT = '<BHBHB'
-    connection, characteristic, att_opcode, offset, n = unpack_from(
+    connection, characteristic, att_opcode, _offset, n = unpack_from(
         FORMAT, data, offset=offset)
     offset += calcsize(FORMAT)
     value = data[offset:offset + n]
@@ -34,7 +34,7 @@ def characteristic_value(data: bytes, offset: int = 0):
         'connection': connection,
         'characteristic': characteristic,
         'att_opcode': att_opcode,
-        'offset': offset,
+        'offset': _offset,
         'value': value,
     }
 
@@ -59,7 +59,7 @@ def descriptor(data: bytes, offset: int = 0):
 
 def descriptor_value(data: bytes, offset: int = 0):
     FORMAT = '<BHHB'
-    connection, descriptor, offset, n = unpack_from(
+    connection, descriptor, _offset, n = unpack_from(
         FORMAT, data, offset=offset)
     offset += calcsize(FORMAT)
     value = data[offset:offset + n]
@@ -68,7 +68,7 @@ def descriptor_value(data: bytes, offset: int = 0):
     payload = {
         'connection': connection,
         'descriptor': descriptor,
-        'offset': offset,
+        'offset': _offset,
         'value': value,
     }
 

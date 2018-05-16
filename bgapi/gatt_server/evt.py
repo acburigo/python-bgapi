@@ -7,7 +7,7 @@ from bgapi.base import _parse_result
 
 def attribute_value(data: bytes, offset: int = 0):
     FORMAT = '<BHBHB'
-    connection, attribute, att_opcode, offset, n = unpack_from(
+    connection, attribute, att_opcode, _offset, n = unpack_from(
         FORMAT, data, offset=offset)
     offset += calcsize(FORMAT)
     value = data[offset:offset + n]
@@ -17,7 +17,7 @@ def attribute_value(data: bytes, offset: int = 0):
         'connection': connection,
         'attribute': attribute,
         'att_opcode': AttOpcode(att_opcode),
-        'offset': offset,
+        'offset': _offset,
         'value': value,
     }
 
@@ -56,7 +56,7 @@ def execute_write_completed(data: bytes, offset: int = 0):
 
 def user_read_request(data: bytes, offset: int = 0):
     FORMAT = '<BHBH'
-    connection, characteristic, att_opcode, offset = unpack_from(
+    connection, characteristic, att_opcode, _offset = unpack_from(
         FORMAT, data, offset=offset)
     offset += calcsize(FORMAT)
 
@@ -64,7 +64,7 @@ def user_read_request(data: bytes, offset: int = 0):
         'connection': connection,
         'characteristic': characteristic,
         'att_opcode': AttOpcode(att_opcode),
-        'offset': offset,
+        'offset': _offset,
     }
 
     return payload, offset
@@ -72,7 +72,7 @@ def user_read_request(data: bytes, offset: int = 0):
 
 def user_write_request(data: bytes, offset: int = 0):
     FORMAT = '<BHBHB'
-    connection, characteristic, att_opcode, offset, n = unpack_from(
+    connection, characteristic, att_opcode, _offset, n = unpack_from(
         FORMAT, data, offset=offset)
     offset += calcsize(FORMAT)
     value = data[offset:offset + n]
@@ -82,7 +82,7 @@ def user_write_request(data: bytes, offset: int = 0):
         'connection': connection,
         'characteristic': characteristic,
         'att_opcode': AttOpcode(att_opcode),
-        'offset': offset,
+        'offset': _offset,
         'value': value,
     }
 
