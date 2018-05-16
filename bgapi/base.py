@@ -1,26 +1,6 @@
-from enum import IntEnum
 from struct import (pack, unpack_from, calcsize, error)
 
-
-class MessageType(IntEnum):
-    COMMAND_RESPONSE = 0x20
-    EVENT = 0xa0
-
-
-class MessageClass(IntEnum):
-    COEX = 0x20
-    DFU = 0x00
-    ENDPOINT = 0x0b
-    FLASH = 0x0d
-    GATT = 0x09
-    GATT_SERVER = 0x0a
-    HARDWARE = 0x0c
-    LE_CONNECTION = 0x08
-    LE_GAP = 0x03
-    SM = 0x0f
-    SYSTEM = 0x01
-    TEST = 0x0e
-    USER = 0xff
+from bgapi import (MessageType, MessageClass, Error)
 
 
 PARSE_MAP = {
@@ -138,5 +118,5 @@ def _parse_basic_response(data: bytes, offset: int):
     result = unpack_from(FORMAT, data, offset=offset)
     offset += calcsize(FORMAT)
     return {
-        'result': result,
+        'result': Error(result),
     }
