@@ -14,7 +14,6 @@ from . import system
 from . import test
 from . import user
 
-
 PARSE_MAP = {
     MessageClass.COEX: coex.parse.from_binary,
     MessageClass.DFU: dfu.parse.from_binary,
@@ -32,10 +31,11 @@ PARSE_MAP = {
 }
 
 
-def from_binary(data: bytes, offset: int):
+def from_binary(data: bytes, offset: int = 0):
     FORMAT = '<BBBB'
     try:
-        msg_type, min_payload_len, msg_class, msg_id = unpack_from(FORMAT, data, offset=offset)
+        msg_type, min_payload_len, msg_class, msg_id = unpack_from(
+            FORMAT, data, offset=offset)
         offset += calcsize(FORMAT)
         payload, offset = PARSE_MAP[msg_class](msg_type, msg_id, data, offset)
         packet = {
