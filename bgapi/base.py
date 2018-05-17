@@ -95,12 +95,38 @@ PARSE_MAP = {
         },
 
         MessageClass.SM: {
+            0x0e: bgapi.sm.rsp.bonding_confirm,
+            0x01: bgapi.sm.rsp.configure,
+            0x06: bgapi.sm.rsp.delete_bonding,
+            0x07: bgapi.sm.rsp.delete_bondings,
+            0x08: bgapi.sm.rsp.enter_passkey,
+            0x04: bgapi.sm.rsp.increase_security,
+            0x0b: bgapi.sm.rsp.list_all_bondings,
+            0x09: bgapi.sm.rsp.passkey_confirm,
+            0x00: bgapi.sm.rsp.set_bondable_mode,
+            0x0f: bgapi.sm.rsp.set_debug_mode,
+            0x0a: bgapi.sm.rsp.set_oob_data,
+            0x10: bgapi.sm.rsp.set_passkey,
+            0x12: bgapi.sm.rsp.set_sc_remote_oob_data,
+            0x02: bgapi.sm.rsp.store_bonding_configuration,
+            0x11: bgapi.sm.rsp.use_sc_oob,
         },
 
         MessageClass.SYSTEM: {
+            0x03: bgapi.system.rsp.get_bt_address,
+            0x0f: bgapi.system.rsp.get_counters,
+            0x0b: bgapi.system.rsp.get_random_data,
+            0x0c: bgapi.system.rsp.halt,
+            0x00: bgapi.system.rsp.hello,
+            0x04: bgapi.system.rsp.set_bt_address,
+            0x0d: bgapi.system.rsp.set_device_name,
+            0x0a: bgapi.system.rsp.set_tx_power,
         },
 
         MessageClass.TEST: {
+            0x02: bgapi.test.rsp.dtm_end,
+            0x01: bgapi.test.rsp.dtm_rx,
+            0x00: bgapi.test.rsp.dtm_tx,
         },
 
         MessageClass.USER: {
