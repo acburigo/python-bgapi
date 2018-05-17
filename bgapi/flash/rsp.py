@@ -1,24 +1,29 @@
 from struct import (unpack_from, calcsize)
 
-from bgapi.base import _parse_result
-
 
 def ps_erase(data: bytes, offset: int = 0):
-    result, offset = _parse_result(data, offset)
-    payload = {'result': result}
+    FORMAT = '<H'
+    result, = unpack_from(FORMAT, data, offset=offset)
+    offset += calcsize(FORMAT)
+    payload = {
+        'result': result,
+    }
     return payload, offset
 
 
 def ps_erase_all(data: bytes, offset: int = 0):
-    result, offset = _parse_result(data, offset)
-    payload = {'result': result}
+    FORMAT = '<H'
+    result, = unpack_from(FORMAT, data, offset=offset)
+    offset += calcsize(FORMAT)
+    payload = {
+        'result': result,
+    }
     return payload, offset
 
 
 def ps_load(data: bytes, offset: int = 0):
-    result, offset = _parse_result(data, offset)
-    FORMAT = '<B'
-    n = unpack_from(FORMAT, data, offset=offset)
+    FORMAT = '<HB'
+    result, n = unpack_from(FORMAT, data, offset=offset)
     offset += calcsize(FORMAT)
     payload = {
         'result': result,
@@ -29,6 +34,10 @@ def ps_load(data: bytes, offset: int = 0):
 
 
 def ps_save(data: bytes, offset: int = 0):
-    result, offset = _parse_result(data, offset)
-    payload = {'result': result}
+    FORMAT = '<H'
+    result, = unpack_from(FORMAT, data, offset=offset)
+    offset += calcsize(FORMAT)
+    payload = {
+        'result': result,
+    }
     return payload, offset

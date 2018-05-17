@@ -1,9 +1,5 @@
 from struct import (unpack_from, calcsize)
 
-from bgapi.gatt_server.types import CharacteristicStatusFlag
-from bgapi.gatt.types import (ClientConfigFlag, AttOpcode)
-from bgapi.base import _parse_result
-
 
 def attribute_value(data: bytes, offset: int = 0):
     FORMAT = '<BHBHB'
@@ -41,10 +37,9 @@ def characteristic_status(data: bytes, offset: int = 0):
 
 
 def execute_write_completed(data: bytes, offset: int = 0):
-    FORMAT = '<B'
-    connection, = unpack_from(FORMAT, data, offset=offset)
+    FORMAT = '<BH'
+    connection, result = unpack_from(FORMAT, data, offset=offset)
     offset += calcsize(FORMAT)
-    result, offset = _parse_result(data, offset)
 
     payload = {
         'connection': connection,

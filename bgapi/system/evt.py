@@ -1,7 +1,5 @@
 from struct import (unpack_from, calcsize)
 
-from bgapi.base import _parse_result
-
 
 def awake(data: bytes, offset: int = 0):
     return {}, offset
@@ -55,6 +53,10 @@ def external_signal(data: bytes, offset: int = 0):
 
 
 def hardware_error(data: bytes, offset: int = 0):
-    status, offset = _parse_result(data, offset)
-    payload = {'status': status}
+    FORMAT = '<H'
+    status, = unpack_from(FORMAT, data, offset=offset)
+    offset += calcsize(FORMAT)
+    payload = {
+        'status': status,
+    }
     return payload, offset

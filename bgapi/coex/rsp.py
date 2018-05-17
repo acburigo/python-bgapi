@@ -1,12 +1,9 @@
 from struct import (unpack_from, calcsize)
 
-from bgapi.base import _parse_result
-
 
 def get_counters(data: bytes, offset: int = 0):
-    result, offset = _parse_result(data, offset)
-    FORMAT = '<B'
-    n = unpack_from(FORMAT, data, offset=offset)
+    FORMAT = '<HB'
+    result, n = unpack_from(FORMAT, data, offset=offset)
     offset += calcsize(FORMAT)
     counters = unpack_from('<%dB' % n, data, offset=offset)
     payload = {
@@ -18,6 +15,10 @@ def get_counters(data: bytes, offset: int = 0):
 
 
 def set_options(data: bytes, offset: int = 0):
-    result, offset = _parse_result(data, offset)
-    payload = {'result': result}
+    FORMAT = '<H'
+    result, = unpack_from(FORMAT, data, offset=offset)
+    offset += calcsize(FORMAT)
+    payload = {
+        'result': result,
+    }
     return payload, offset

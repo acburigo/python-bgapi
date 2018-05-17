@@ -1,6 +1,6 @@
 from struct import pack
 
-from bgapi import command
+from bgapi.base_command import command
 from bgapi.types import (MessageType, MessageClass)
 
 

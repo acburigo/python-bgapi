@@ -1,14 +1,9 @@
 from struct import (unpack_from, calcsize)
 
-from bgapi.base import _parse_result
-from bgapi.le_gap.types import AddressType
-from bgapi.le_connection.types import Security
-
 
 def closed(data: bytes, offset: int = 0):
-    reason, offset = _parse_result(data, offset)
     FORMAT = '<HB'
-    connection, = unpack_from(FORMAT, data, offset=offset)
+    reason, connection, = unpack_from(FORMAT, data, offset=offset)
     offset += calcsize(FORMAT)
 
     payload = {

@@ -1,8 +1,5 @@
 from struct import (unpack_from, calcsize)
 
-from bgapi import Error
-from bgapi.base import _parse_result
-
 
 def characteristic(data: bytes, offset: int = 0):
     FORMAT = '<BHBB'
@@ -89,10 +86,9 @@ def mtu_exchanged(data: bytes, offset: int = 0):
 
 
 def procedure_completed(data: bytes, offset: int = 0):
-    FORMAT = '<B'
-    connection, = unpack_from(FORMAT, data, offset=offset)
+    FORMAT = '<BH'
+    connection, result = unpack_from(FORMAT, data, offset=offset)
     offset += calcsize(FORMAT)
-    result, offset = _parse_result(data, offset)
 
     payload = {
         'connection': connection,

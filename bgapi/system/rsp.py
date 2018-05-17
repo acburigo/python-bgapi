@@ -1,7 +1,5 @@
 from struct import (unpack_from, calcsize)
 
-from bgapi.base import _parse_result
-
 
 def get_bt_address(data: bytes, offset: int = 0):
     ADDRESS_SIZE_BYTES = 6
@@ -9,9 +7,8 @@ def get_bt_address(data: bytes, offset: int = 0):
 
 
 def get_counters(data: bytes, offset: int = 0):
-    result, offset = _parse_result(data, offset)
-    FORMAT = '<HHHH'
-    tx_packets, rx_packets, crc_errors, failures = unpack_from(
+    FORMAT = '<HHHHH'
+    result, tx_packets, rx_packets, crc_errors, failures = unpack_from(
         FORMAT, data, offset=offset)
     offset += calcsize(FORMAT)
     payload = {
@@ -25,9 +22,9 @@ def get_counters(data: bytes, offset: int = 0):
 
 
 def get_random_data(data: bytes, offset: int = 0):
-    result, offset = _parse_result(data, offset)
-    n, = unpack_from('<B', data, offset=offset)
-    offset += 1
+    FORMAT = '<HB'
+    result, n = unpack_from(FORMAT, data, offset=offset)
+    offset += calcsize(FORMAT)
     payload = {
         'result': result,
         'data': data[offset:offset + n],
@@ -37,26 +34,42 @@ def get_random_data(data: bytes, offset: int = 0):
 
 
 def halt(data: bytes, offset: int = 0):
-    result, offset = _parse_result(data, offset)
-    payload = {'result': result}
+    FORMAT = '<H'
+    result, = unpack_from(FORMAT, data, offset=offset)
+    offset += calcsize(FORMAT)
+    payload = {
+        'result': result,
+    }
     return payload, offset
 
 
 def hello(data: bytes, offset: int = 0):
-    result, offset = _parse_result(data, offset)
-    payload = {'result': result}
+    FORMAT = '<H'
+    result, = unpack_from(FORMAT, data, offset=offset)
+    offset += calcsize(FORMAT)
+    payload = {
+        'result': result,
+    }
     return payload, offset
 
 
 def set_bt_address(data: bytes, offset: int = 0):
-    result, offset = _parse_result(data, offset)
-    payload = {'result': result}
+    FORMAT = '<H'
+    result, = unpack_from(FORMAT, data, offset=offset)
+    offset += calcsize(FORMAT)
+    payload = {
+        'result': result,
+    }
     return payload, offset
 
 
 def set_device_name(data: bytes, offset: int = 0):
-    result, offset = _parse_result(data, offset)
-    payload = {'result': result}
+    FORMAT = '<H'
+    result, = unpack_from(FORMAT, data, offset=offset)
+    offset += calcsize(FORMAT)
+    payload = {
+        'result': result,
+    }
     return payload, offset
 
 

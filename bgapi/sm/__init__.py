@@ -1,4 +1,5 @@
-import bgapi.sm.cmd
-import bgapi.sm.rsp
-import bgapi.sm.evt
-from bgapi.sm.types import *
+from . import cmd
+from . import rsp
+from . import evt
+from . import parse
+from .types import *

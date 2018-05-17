@@ -1,4 +1,5 @@
-import bgapi.test.cmd
-import bgapi.test.rsp
-import bgapi.test.evt
-from bgapi.test.types import *
+from . import cmd
+from . import rsp
+from . import evt
+from . import parse
+from .types import *

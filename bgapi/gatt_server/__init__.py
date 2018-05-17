@@ -1,4 +1,5 @@
-import bgapi.gatt_server.cmd
-import bgapi.gatt_server.rsp
-import bgapi.gatt_server.evt
-from bgapi.gatt_server.types import *
+from . import cmd
+from . import rsp
+from . import evt
+from . import parse
+from .types import *

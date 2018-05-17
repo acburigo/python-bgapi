@@ -1,3 +1,4 @@
-import bgapi.user.cmd
-import bgapi.user.rsp
-import bgapi.user.evt
+from . import cmd
+from . import rsp
+from . import evt
+from . import parse
