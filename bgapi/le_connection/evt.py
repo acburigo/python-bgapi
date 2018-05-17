@@ -52,7 +52,7 @@ def parameters(data: bytes, offset: int = 0):
         'interval': interval,
         'latency': latency,
         'timeout': timeout,
-        'security_mode': Security(security_mode),
+        'security_mode': security_mode,
         'txsize': txsize,
     }
 

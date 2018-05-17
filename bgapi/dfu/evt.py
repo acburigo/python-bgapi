@@ -1,6 +1,7 @@
 from struct import (unpack_from, calcsize)
 
 from bgapi import Error
+from bgapi.base import _parse_result
 
 
 def boot(data: bytes, offset: int = 0):
@@ -12,8 +13,6 @@ def boot(data: bytes, offset: int = 0):
 
 
 def boot_failure(data: bytes, offset: int = 0):
-    FORMAT = '<H'
-    reason, = unpack_from(FORMAT, data, offset=offset)
-    offset += calcsize(FORMAT)
-    payload = {'reason': Error(reason)}
+    reason, offset = _parse_result(data, offset)
+    payload = {'reason': reason}
     return payload, offset

@@ -244,4 +244,4 @@ def _parse_result(data: bytes, offset: int):
     FORMAT = '<H'
     result = unpack_from(FORMAT, data, offset=offset)
     offset += calcsize(FORMAT)
-    return Error(result), offset
+    return result, offset
