@@ -23,7 +23,7 @@ def clear_advertise_configuration(data: bytes, offset: int = 0):
 
 def connect(data: bytes, offset: int = 0):
     FORMAT = '<HB'
-    result, connection, = unpack_from(FORMAT, data, offset=offset)
+    result, connection = unpack_from(FORMAT, data, offset=offset)
     offset += calcsize(FORMAT)
     payload = {
         'result': result,
