@@ -33,11 +33,12 @@ PARSE_MAP = {
 
 def from_binary(data: bytes, offset: int = 0):
     FORMAT = '<BBBB'
+    _offset = offset
     try:
         msg_type, min_payload_len, msg_class, msg_id = unpack_from(
-            FORMAT, data, offset=offset)
-        offset += calcsize(FORMAT)
-        payload, offset = PARSE_MAP[msg_class](msg_type, msg_id, data, offset)
+            FORMAT, data, offset=_offset)
+        _offset += calcsize(FORMAT)
+        payload, _offset = PARSE_MAP[msg_class](msg_type, msg_id, data, _offset)
         packet = {
             'msg_type': msg_type,
             'min_payload_len': min_payload_len,
@@ -45,6 +46,6 @@ def from_binary(data: bytes, offset: int = 0):
             'msg_id': msg_id,
             'payload': payload,
         }
-        return packet, offset
+        return packet, _offset
     except error:
-        return None, 0
+        return None, offset
