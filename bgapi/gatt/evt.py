@@ -99,7 +99,7 @@ def procedure_completed(data: bytes, offset: int = 0):
 
 
 def service(data: bytes, offset: int = 0):
-    FORMAT = '<BHB'
+    FORMAT = '<BIB'
     connection, service, n = unpack_from(FORMAT, data, offset=offset)
     offset += calcsize(FORMAT)
     uuid = data[offset:offset + n]
