@@ -13,7 +13,7 @@ def characteristic(data: bytes, offset: int = 0):
         'connection': connection,
         'characteristic': characteristic,
         'properties': properties,
-        'uuid': uuid,
+        'uuid': uuid[::-1],
     }
 
     return payload, offset
@@ -48,7 +48,7 @@ def descriptor(data: bytes, offset: int = 0):
     payload = {
         'connection': connection,
         'descriptor': descriptor,
-        'uuid': uuid,
+        'uuid': uuid[::-1],
     }
 
     return payload, offset
@@ -108,7 +108,7 @@ def service(data: bytes, offset: int = 0):
     payload = {
         'connection': connection,
         'service': service,
-        'uuid': uuid,
+        'uuid': uuid[::-1],
     }
 
     return payload, offset
