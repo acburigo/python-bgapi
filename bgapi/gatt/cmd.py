@@ -75,7 +75,7 @@ def prepare_characteristic_value_reliable_write(connection, characteristic,
     MSG_CLASS = MessageClass.GATT.value
     MSG_ID = 0x13
     payload = pack('<BHHB', connection, characteristic, offset,
-                   len(value)) + value
+                   len(value)) + bytes(value)
     return command(MSG_TYPE, MIN_PAYLOAD_LENGTH, MSG_CLASS, MSG_ID, payload)
 
 
@@ -86,7 +86,7 @@ def prepare_characteristic_value_write(connection, characteristic, offset,
     MSG_CLASS = MessageClass.GATT.value
     MSG_ID = 0x0b
     payload = pack('<BHHB', connection, characteristic, offset,
-                   len(value)) + value
+                   len(value)) + bytes(value)
     return command(MSG_TYPE, MIN_PAYLOAD_LENGTH, MSG_CLASS, MSG_ID, payload)
 
 
@@ -169,7 +169,7 @@ def write_characteristic_value(connection, characteristic, value):
     MIN_PAYLOAD_LENGTH = 0x04
     MSG_CLASS = MessageClass.GATT.value
     MSG_ID = 0x09
-    payload = pack('<BHB', connection, characteristic, len(value)) + value
+    payload = pack('<BHB', connection, characteristic, len(value)) + bytes(value)
     return command(MSG_TYPE, MIN_PAYLOAD_LENGTH, MSG_CLASS, MSG_ID, payload)
 
 
@@ -179,7 +179,7 @@ def write_characteristic_value_without_response(connection, characteristic,
     MIN_PAYLOAD_LENGTH = 0x04
     MSG_CLASS = MessageClass.GATT.value
     MSG_ID = 0x0a
-    payload = pack('<BHB', connection, characteristic, len(value)) + value
+    payload = pack('<BHB', connection, characteristic, len(value)) + bytes(value)
     return command(MSG_TYPE, MIN_PAYLOAD_LENGTH, MSG_CLASS, MSG_ID, payload)
 
 
@@ -188,5 +188,5 @@ def write_descriptor_value(connection, descriptor, value):
     MIN_PAYLOAD_LENGTH = 0x04
     MSG_CLASS = MessageClass.GATT.value
     MSG_ID = 0x0f
-    payload = pack('<BHB', connection, descriptor, len(value)) + value
+    payload = pack('<BHB', connection, descriptor, len(value)) + bytes(value)
     return command(MSG_TYPE, MIN_PAYLOAD_LENGTH, MSG_CLASS, MSG_ID, payload)

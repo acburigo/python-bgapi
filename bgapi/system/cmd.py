@@ -73,7 +73,7 @@ def set_device_name(type, name):
     MIN_PAYLOAD_LENGTH = 0x02
     MSG_CLASS = MessageClass.SYSTEM.value
     MSG_ID = 0x0d
-    payload = pack('<BB', type, len(name)) + name
+    payload = pack('<BB', type, len(name)) + bytes(name)
     return command(MSG_TYPE, MIN_PAYLOAD_LENGTH, MSG_CLASS, MSG_ID, payload)
 
 

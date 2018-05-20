@@ -10,7 +10,7 @@ def bt5_set_adv_data(handle, scan_rsp, adv_data):
     MIN_PAYLOAD_LENGTH = 0x03
     MSG_CLASS = MessageClass.LE_GAP.value
     MSG_ID = 0x0c
-    payload = pack('<BBB', handle, scan_rsp, len(adv_data)) + adv_data
+    payload = pack('<BBB', handle, scan_rsp, len(adv_data)) + bytes(adv_data)
     return command(MSG_TYPE, MIN_PAYLOAD_LENGTH, MSG_CLASS, MSG_ID, payload)
 
 
@@ -103,7 +103,7 @@ def set_data_channel_classification(channel_map):
     MIN_PAYLOAD_LENGTH = 0x01
     MSG_CLASS = MessageClass.LE_GAP.value
     MSG_ID = 0x19
-    payload = pack('<B', len(channel_map)) + channel_map
+    payload = pack('<B', len(channel_map)) + bytes(channel_map)
     return command(MSG_TYPE, MIN_PAYLOAD_LENGTH, MSG_CLASS, MSG_ID, payload)
 
 

@@ -36,5 +36,5 @@ def ps_save(key, value):
     MIN_PAYLOAD_LENGTH = 0x03
     MSG_CLASS = MessageClass.FLASH.value
     MSG_ID = 0x02
-    payload = pack('<HB', key, len(value)) + value
+    payload = pack('<HB', key, len(value)) + bytes(value)
     return command(MSG_TYPE, MIN_PAYLOAD_LENGTH, MSG_CLASS, MSG_ID, payload)

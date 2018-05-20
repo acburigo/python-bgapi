@@ -9,7 +9,7 @@ def find_attribute(start, type_data):
     MIN_PAYLOAD_LENGTH = 0x03
     MSG_CLASS = MessageClass.GATT_SERVER.value
     MSG_ID = 0x06
-    payload = pack('<HB', start, len(type_data)) + type_data
+    payload = pack('<HB', start, len(type_data)) + bytes(type_data)
     return command(MSG_TYPE, MIN_PAYLOAD_LENGTH, MSG_CLASS, MSG_ID, payload)
 
 
@@ -36,7 +36,7 @@ def send_characteristic_notification(connection, characteristic, value):
     MIN_PAYLOAD_LENGTH = 0x04
     MSG_CLASS = MessageClass.GATT_SERVER.value
     MSG_ID = 0x05
-    payload = pack('<BHB', connection, characteristic, len(value)) + value
+    payload = pack('<BHB', connection, characteristic, len(value)) + bytes(value)
     return command(MSG_TYPE, MIN_PAYLOAD_LENGTH, MSG_CLASS, MSG_ID, payload)
 
 
@@ -46,7 +46,7 @@ def send_user_read_response(connection, characteristic, att_errorcode, value):
     MSG_CLASS = MessageClass.GATT_SERVER.value
     MSG_ID = 0x03
     payload = pack('<BHBB', connection, characteristic, att_errorcode,
-                   len(value)) + value
+                   len(value)) + bytes(value)
     return command(MSG_TYPE, MIN_PAYLOAD_LENGTH, MSG_CLASS, MSG_ID, payload)
 
 
@@ -73,5 +73,5 @@ def write_attribute_value(attribute, offset, value):
     MIN_PAYLOAD_LENGTH = 0x05
     MSG_CLASS = MessageClass.GATT_SERVER.value
     MSG_ID = 0x02
-    payload = pack('<HHB', attribute, offset, len(value)) + value
+    payload = pack('<HHB', attribute, offset, len(value)) + bytes(value)
     return command(MSG_TYPE, MIN_PAYLOAD_LENGTH, MSG_CLASS, MSG_ID, payload)

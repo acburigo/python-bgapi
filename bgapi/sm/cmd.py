@@ -99,7 +99,7 @@ def set_oob_data(oob_data):
     MIN_PAYLOAD_LENGTH = 0x01
     MSG_CLASS = MessageClass.SM.value
     MSG_ID = 0x0a
-    payload = pack('<B', len(oob_data)) + oob_data
+    payload = pack('<B', len(oob_data)) + bytes(oob_data)
     return command(MSG_TYPE, MIN_PAYLOAD_LENGTH, MSG_CLASS, MSG_ID, payload)
 
 
@@ -117,7 +117,7 @@ def set_sc_remote_oob_data(oob_data):
     MIN_PAYLOAD_LENGTH = 0x01
     MSG_CLASS = MessageClass.SM.value
     MSG_ID = 0x12
-    payload = pack('<B', len(oob_data)) + oob_data
+    payload = pack('<B', len(oob_data)) + bytes(oob_data)
     return command(MSG_TYPE, MIN_PAYLOAD_LENGTH, MSG_CLASS, MSG_ID, payload)
 
 
