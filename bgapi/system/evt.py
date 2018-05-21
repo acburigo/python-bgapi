@@ -1,3 +1,4 @@
+import struct
 from struct import (unpack_from, calcsize)
 
 
@@ -31,6 +32,9 @@ def error(data: bytes, offset: int = 0):
 
     _data = data[offset:offset + n]
     offset += n
+
+    if len(_data) < n:
+        raise struct.error
 
     payload = {
         'reason': reason,

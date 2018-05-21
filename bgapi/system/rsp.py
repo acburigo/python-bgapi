@@ -1,9 +1,14 @@
-from struct import (unpack_from, calcsize)
+from struct import (unpack_from, calcsize, error)
 
 
 def get_bt_address(data: bytes, offset: int = 0):
     ADDRESS_SIZE_BYTES = 6
-    return {'address': data[offset:offset + ADDRESS_SIZE_BYTES]}
+    address = data[offset:offset + ADDRESS_SIZE_BYTES]
+
+    if len(address) < ADDRESS_SIZE_BYTES:
+        raise error
+
+    return {'address': address}
 
 
 def get_counters(data: bytes, offset: int = 0):
@@ -25,11 +30,16 @@ def get_random_data(data: bytes, offset: int = 0):
     FORMAT = '<HB'
     result, n = unpack_from(FORMAT, data, offset=offset)
     offset += calcsize(FORMAT)
+    _data = data[offset:offset + n]
+    offset += n
+
+    if len(_data) < n:
+        raise error
+
     payload = {
         'result': result,
-        'data': data[offset:offset + n],
+        'data': _data,
     }
-    offset += n
     return payload, offset
 
 

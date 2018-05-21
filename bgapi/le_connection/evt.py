@@ -1,4 +1,4 @@
-from struct import (unpack_from, calcsize)
+from struct import (unpack_from, calcsize, error)
 
 
 def closed(data: bytes, offset: int = 0):
@@ -18,6 +18,9 @@ def opened(data: bytes, offset: int = 0):
     ADDRESS_SIZE_BYTES = 6
     address = data[offset:offset + ADDRESS_SIZE_BYTES]
     offset += ADDRESS_SIZE_BYTES
+
+    if len(address) < ADDRESS_SIZE_BYTES:
+        raise error
 
     FORMAT = '<BBBBB'
     address_type, master, connection, bonding, advertiser = unpack_from(

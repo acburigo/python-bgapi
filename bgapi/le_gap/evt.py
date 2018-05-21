@@ -1,4 +1,4 @@
-from struct import (unpack_from, calcsize)
+from struct import (unpack_from, calcsize, error)
 
 
 def adv_timeout(data: bytes, offset: int = 0):
@@ -21,6 +21,9 @@ def scan_request(data: bytes, offset: int = 0):
     ADDRESS_SIZE_BYTES = 6
     address = data[offset:offset + ADDRESS_SIZE_BYTES]
     offset += ADDRESS_SIZE_BYTES
+
+    if len(address) < ADDRESS_SIZE_BYTES:
+        raise error
 
     FORMAT = '<BB'
     address_type, bonding = unpack_from(FORMAT, data, offset=offset)
@@ -45,12 +48,18 @@ def scan_response(data: bytes, offset: int = 0):
     address = data[offset:offset + ADDRESS_SIZE_BYTES]
     offset += ADDRESS_SIZE_BYTES
 
+    if len(address) < ADDRESS_SIZE_BYTES:
+        raise error
+
     FORMAT = '<BBB'
     address_type, bonding, n = unpack_from(FORMAT, data, offset=offset)
     offset += calcsize(FORMAT)
 
     _data = data[offset:offset + n]
     offset += n
+
+    if len(_data) < n:
+        raise error
 
     payload = {
         'rssi': rssi,

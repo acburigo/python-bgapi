@@ -1,4 +1,4 @@
-from struct import (unpack_from, calcsize)
+from struct import (unpack_from, calcsize, error)
 
 
 def bonding_confirm(data: bytes, offset: int = 0):
@@ -146,9 +146,14 @@ def use_sc_oob(data: bytes, offset: int = 0):
     result, = unpack_from(FORMAT, data, offset=offset)
     offset += calcsize(FORMAT)
     SIZE_BYTES = 32
+    oob_data = data[offset:offset + SIZE_BYTES]
+
+    if len(oob_data) < SIZE_BYTES:
+        raise error
+
     payload = {
         'result': result,
-        'oob_data': data[offset:offset + SIZE_BYTES],
+        'oob_data': oob_data,
     }
     offset += SIZE_BYTES
     return payload, offset

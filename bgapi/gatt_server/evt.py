@@ -1,4 +1,4 @@
-from struct import (unpack_from, calcsize)
+from struct import (unpack_from, calcsize, error)
 
 
 def attribute_value(data: bytes, offset: int = 0):
@@ -8,6 +8,9 @@ def attribute_value(data: bytes, offset: int = 0):
     offset += calcsize(FORMAT)
     value = data[offset:offset + n]
     offset += n
+
+    if len(value) < n:
+        raise error
 
     payload = {
         'connection': connection,
@@ -72,6 +75,9 @@ def user_write_request(data: bytes, offset: int = 0):
     offset += calcsize(FORMAT)
     value = data[offset:offset + n]
     offset += n
+
+    if len(value) < n:
+        raise error
 
     payload = {
         'connection': connection,

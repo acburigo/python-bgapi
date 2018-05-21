@@ -1,4 +1,4 @@
-from struct import (unpack_from, calcsize)
+from struct import (unpack_from, calcsize, error)
 
 
 def find_attribute(data: bytes, offset: int = 0):
@@ -16,11 +16,16 @@ def read_attribute_type(data: bytes, offset: int = 0):
     FORMAT = '<HB'
     result, n = unpack_from(FORMAT, data, offset=offset)
     offset += calcsize(FORMAT)
+    _type = data[offset:offset + n]
+    offset += n
+
+    if len(_type) < n:
+        raise error
+
     payload = {
         'result': result,
-        'type': data[offset:offset + n],
+        'type': _type,
     }
-    offset += n
     return payload, offset
 
 
@@ -28,11 +33,16 @@ def read_attribute_value(data: bytes, offset: int = 0):
     FORMAT = '<HB'
     result, n = unpack_from(FORMAT, data, offset=offset)
     offset += calcsize(FORMAT)
+    value = data[offset:offset + n]
+    offset += n
+
+    if len(value) < n:
+        raise error
+
     payload = {
         'result': result,
-        'value': data[offset:offset + n],
+        'value': value,
     }
-    offset += n
     return payload, offset
 
 

@@ -1,4 +1,4 @@
-from struct import (unpack_from, calcsize)
+from struct import (unpack_from, calcsize, error)
 
 
 def characteristic(data: bytes, offset: int = 0):
@@ -8,6 +8,9 @@ def characteristic(data: bytes, offset: int = 0):
     offset += calcsize(FORMAT)
     uuid = data[offset:offset + n]
     offset += n
+
+    if len(uuid) < n:
+        raise error
 
     payload = {
         'connection': connection,
@@ -27,6 +30,9 @@ def characteristic_value(data: bytes, offset: int = 0):
     value = data[offset:offset + n]
     offset += n
 
+    if len(value) < n:
+        raise error
+
     payload = {
         'connection': connection,
         'characteristic': characteristic,
@@ -45,6 +51,9 @@ def descriptor(data: bytes, offset: int = 0):
     uuid = data[offset:offset + n]
     offset += n
 
+    if len(uuid) < n:
+        raise error
+
     payload = {
         'connection': connection,
         'descriptor': descriptor,
@@ -61,6 +70,9 @@ def descriptor_value(data: bytes, offset: int = 0):
     offset += calcsize(FORMAT)
     value = data[offset:offset + n]
     offset += n
+
+    if len(value) < n:
+        raise error
 
     payload = {
         'connection': connection,
@@ -104,6 +116,9 @@ def service(data: bytes, offset: int = 0):
     offset += calcsize(FORMAT)
     uuid = data[offset:offset + n]
     offset += n
+
+    if len(uuid) < n:
+        raise error
 
     payload = {
         'connection': connection,

@@ -1,4 +1,4 @@
-from struct import (unpack_from, calcsize)
+from struct import (unpack_from, calcsize, error)
 
 
 def bonded(data: bytes, offset: int = 0):
@@ -65,6 +65,9 @@ def list_bonding_entry(data: bytes, offset: int = 0):
     ADDRESS_SIZE_BYTES = 6
     address = data[offset:offset + ADDRESS_SIZE_BYTES]
     offset += ADDRESS_SIZE_BYTES
+
+    if len(address) < ADDRESS_SIZE_BYTES:
+        raise error
 
     FORMAT = '<B'
     address_type, = unpack_from(FORMAT, data, offset=offset)
