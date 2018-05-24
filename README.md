@@ -56,7 +56,7 @@ We are not in PyPI yet.
 
 If you are interested in the latest (possibly unstable) features, you may issue the following command:
 
-`pip install git+https://github.com/acburigo/python-bgapi.git`
+`pip install --upgrade git+https://github.com/acburigo/python-bgapi.git`
 
 ## Developers
 
