@@ -1,6 +1,10 @@
 from enum import IntEnum
 
 
+class ParseError(Exception):
+    pass
+
+
 class MessageType(IntEnum):
     COMMAND_RESPONSE = 0x20
     EVENT = 0xa0
