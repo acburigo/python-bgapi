@@ -1,6 +1,3 @@
-from enum import IntFlag
-
-
-class CharacteristicStatusFlag(IntFlag):
+class CharacteristicStatusFlag:
     CLIENT_CONFIG = 1
     CONFIRMATION = 2

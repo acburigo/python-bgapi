@@ -1,4 +1,4 @@
-from enum import (IntEnum, IntFlag)
+from enum import IntEnum
 
 
 class AttOpcode(IntEnum):
@@ -21,12 +21,12 @@ class AttOpcode(IntEnum):
     HANDLE_VALUE_INDICATION = 29
 
 
-class ClientConfigFlag(IntFlag):
+class ClientConfigFlag:
     DISABLE = 0
     NOTIFICATION = 1
     INDICATION = 2
 
 
-class ExecuteWriteFlag(IntFlag):
+class ExecuteWriteFlag:
     CANCEL = 0
     COMMIT = 1

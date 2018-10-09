@@ -1,7 +1,7 @@
-from enum import (IntEnum, IntFlag)
+from enum import IntEnum
 
 
-class BondingKey(IntFlag):
+class BondingKey:
     LTK = 1
     ADDR_PUBLIC = 2
     ADDR_STATIC = 4
