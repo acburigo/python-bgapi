@@ -1,4 +1,4 @@
-from enum import (IntEnum, IntFlag)
+from enum import IntEnum
 
 
 class AddressType(IntEnum):
@@ -35,7 +35,7 @@ class DiscoverableMode(IntEnum):
     USER_DATA = 4
 
 
-class PhyType(IntFlag):
+class PhyType:
     PHY_1M = 1
     PHY_2M = 2
     PHY_CODED = 4
