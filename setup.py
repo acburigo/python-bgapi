@@ -28,7 +28,6 @@ setup(
               'bluetooth low energy'],
     package_dir={'': 'src'},
     packages=find_packages(where='src'),
-    #packages=find_packages(exclude=['contrib', 'docs', 'tests']),
     zip_safe=False,
     author='Arthur Crippa Búrigo',
     author_email='arthurcburigo@gmail.com',
